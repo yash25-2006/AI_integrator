@@ -45,8 +45,8 @@
       "model": "gemini-3.6-flash",
       "priority": 1,
       "lastStatus": "Healthy",
-      "lastChecked": "2026-08-17T17:34:14.037Z",
-      "lastLatencyMs": 13772,
+      "lastChecked": "2026-08-17T17:51:16.673Z",
+      "lastLatencyMs": 3052,
       "availableModels": [
         {
           "id": "gemini-3.6-flash",
