@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemma 4 AI Integration Hub</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-box">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          <span class="logo-text">AI Integrator</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">GEMMA 4 HUB</div>
+        <a href="#overview" class="nav-item active" data-tab="overview">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>Overview</span>
+        </a>
+        <a href="#playground" class="nav-item" data-tab="playground">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>Playground</span>
+        </a>
+        <a href="#connection" class="nav-item" data-tab="connection">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          <span>Connection</span>
+        </a>
+        <a href="#integration" class="nav-item" data-tab="integration">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v1"/><path d="M18 8l4 4-4 4"/><path d="M8 12h14"/></svg>
+          <span>Software Integration</span>
+        </a>
+        <a href="#logs" class="nav-item" data-tab="logs">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span>Logs & Request History</span>
+        </a>
+
+        <div class="nav-section-label" style="margin-top: 24px;">BUILT-IN AI UTILITIES</div>
+        <a href="#software-tools" class="nav-item" data-tab="software-tools">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span>Application AI Tools</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="provider-quick-card">
+          <div class="quick-title">Gemma 4 Health</div>
+          <div class="quick-status-row">
+            <span class="status-indicator-dot offline" id="sidebar-status-dot"></span>
+            <span class="quick-status-text" id="sidebar-status-text">Not Configured</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-title-box">
+          <h1 id="page-title">Gemma 4 Overview</h1>
+          <p class="header-subtitle">Google's open-weight AI model family integration hub</p>
+        </div>
+
+        <div class="header-actions">
+          <div class="status-badge" id="top-status-badge">
+            <span class="status-indicator-dot offline" id="top-status-dot"></span>
+            <span id="top-status-text">Not Configured</span>
+          </div>
+          <div class="model-badge" id="top-model-badge">
+            gemma-4-26b-a4b-it
+          </div>
+        </div>
+      </header>
+
+      <!-- Global Alert / Toast Notifications -->
+      <div id="toast-container" class="toast-container"></div>
+
+      <!-- Tab Content Sections -->
+      <div class="content-wrapper">
+
+        <!-- 1. OVERVIEW TAB -->
+        <section id="tab-overview" class="tab-pane active">
+          <div class="grid-2col">
+            <!-- Left Overview Card -->
+            <div class="card glass-card">
+              <div class="card-header">
+                <h2 class="card-title">Gemma 4 Engine Overview</h2>
+                <span class="badge badge-accent">Google Open-Weight</span>
+              </div>
+              <p class="card-desc">
+                Gemma 4 is Google's state-of-the-art open-weight AI model series designed for advanced reasoning, high-efficiency code generation, text synthesis, and structured multi-turn instructions.
+              </p>
+              
+              <div class="spec-grid">
+                <div class="spec-item">
+                  <div class="spec-label">Selected Model</div>
+                  <div class="spec-value highlight" id="overview-model-id">gemma-4-26b-a4b-it</div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-label">Provider Status</div>
+                  <div class="spec-value" id="overview-health-status">○ Not Configured</div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-label">Software Integration</div>
+                  <div class="spec-value" id="overview-integration-status">Disabled</div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-label">Last Checked Latency</div>
+                  <div class="spec-value" id="overview-latency">--</div>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+
+              <h3 class="subsection-title">Supported Model Capabilities</h3>
+              <div class="tags-row" id="overview-capabilities">
+                <span class="tag">Text Completion</span>
+                <span class="tag">Deep Reasoning</span>
+                <span class="tag">Code Generation</span>
+                <span class="tag">Multimodal Vision</span>
+                <span class="tag">Function Calling</span>
+              </div>
+            </div>
+
+            <!-- Right Status & Model Selector Card -->
+            <div class="card glass-card">
+              <div class="card-header">
+                <h2 class="card-title">Active Model Selection</h2>
+                <span class="badge" id="overview-role-badge">Role: Primary</span>
+              </div>
+
+              <div class="form-group">
+                <label for="overview-model-select">Target Model ID</label>
+                <select id="overview-model-select" class="form-select">
+                  <option value="gemini-3.6-flash" selected>Gemini 2.0 Flash (Fast Model - Sub-Second)</option>
+                  <option value="gemma-4-26b-a4b-it">Gemma 4 26B A4B (gemma-4-26b-a4b-it)</option>
+                  <option value="gemma-4-31b-it">Gemma 4 31B (gemma-4-31b-it)</option>
+                </select>
+              </div>
+
+              <div class="quick-action-box">
+                <div class="action-info">
+                  <strong>Need to test connectivity?</strong>
+                  <p>Run a real live latency test against the API endpoint.</p>
+                </div>
+                <button class="btn btn-secondary" id="btn-quick-test">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  Test Connection
+                </button>
+              </div>
+
+              <div class="quick-action-box" style="margin-top: 16px;">
+                <div class="action-info">
+                  <strong>Enable for Software</strong>
+                  <p>Route existing application AI features through Gemma 4.</p>
+                </div>
+                <button class="btn btn-primary" id="btn-quick-enable">
+                  Enable Integration
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. PLAYGROUND TAB -->
+        <section id="tab-playground" class="tab-pane">
+          <div class="playground-layout">
+            <!-- Sidebar Controls -->
+            <div class="card playground-sidebar">
+              <h2 class="card-title">Playground Parameters</h2>
+              
+              <div class="form-group">
+                <label for="pg-model-select">Active Model</label>
+                <select id="pg-model-select" class="form-select">
+                  <option value="gemini-3.6-flash" selected>Gemini 2.0 Flash (Fast Model - Sub-Second)</option>
+                  <option value="gemma-4-26b-a4b-it">Gemma 4 26B A4B</option>
+                  <option value="gemma-4-31b-it">Gemma 4 31B</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="pg-system-prompt">System Prompt</label>
+                <textarea id="pg-system-prompt" class="form-textarea" rows="4" placeholder="You are a helpful, expert AI assistant specializing in software development and logical reasoning..."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="pg-temperature">Temperature: <span id="pg-temp-val">0.7</span></label>
+                <input type="range" id="pg-temperature" min="0" max="1" step="0.05" value="0.7" class="form-range">
+              </div>
+
+              <button class="btn btn-outline" id="btn-clear-chat">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                Clear Conversation
+              </button>
+            </div>
+
+            <!-- Chat Output & Prompt Box -->
+            <div class="card playground-chat-card">
+              <div class="chat-header">
+                <div class="chat-title-info">
+                  <h3>Interactive Gemma 4 Workspace</h3>
+                  <span class="chat-subtitle">Real backend requests routed to Gemma 4 provider</span>
+                </div>
+                <div class="metrics-row" id="pg-metrics-row">
+                  <span class="metric-pill" id="pg-latency-pill">Latency: --</span>
+                  <span class="metric-pill" id="pg-tokens-pill">Tokens: --</span>
+                </div>
+              </div>
+
+              <!-- Message History Scroll -->
+              <div class="chat-messages-container" id="chat-messages">
+                <div class="chat-message system-welcome">
+                  <div class="message-avatar">AI</div>
+                  <div class="message-content">
+                    <p><strong>Gemma 4 Playground Ready</strong></p>
+                    <p>Enter a prompt below to interact directly with Gemma 4 through the server's AI Provider layer. Requests use actual API credentials stored securely on the backend.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Input Bar -->
+              <div class="chat-input-wrapper">
+                <textarea id="chat-input" class="chat-input" rows="2" placeholder="Ask Gemma 4 anything... (e.g. Explain quantum computing or write a Node.js API router)"></textarea>
+                <button class="btn btn-primary" id="btn-send-chat">
+                  <span>Send</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. CONNECTION TAB -->
+        <section id="tab-connection" class="tab-pane">
+          <div class="card glass-card max-width-card">
+            <div class="card-header">
+              <h2 class="card-title">Provider Connection & Credentials</h2>
+              <span class="badge badge-accent">Server Security Standard</span>
+            </div>
+            <p class="card-desc">
+              Configure your Google AI Studio or custom endpoint API credentials. Credentials are stored safely in server-side configuration and are <strong>never</strong> exposed to frontend JavaScript or returned in API responses.
+            </p>
+
+            <form id="connection-form" onsubmit="return false;">
+              <div class="form-group">
+                <label for="conn-api-key">API Key</label>
+                <div class="masked-input-row">
+                  <input type="password" id="conn-api-key" class="form-input" placeholder="Enter Gemma API Key (e.g., AIzaSy...)" autocomplete="off">
+                  <button type="button" class="btn btn-secondary" id="btn-toggle-key-visibility">Show</button>
+                </div>
+                <div class="form-help" id="conn-key-status-text">
+                  Status: Not Configured.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="conn-base-url">API Base URL (Default: Google AI Studio Endpoint)</label>
+                <input type="text" id="conn-base-url" class="form-input" value="https://generativelanguage.googleapis.com/v1beta/models">
+              </div>
+
+              <div class="form-group">
+                <label for="conn-default-model">Default Model</label>
+                <select id="conn-default-model" class="form-select">
+                  <option value="gemini-3.6-flash" selected>Gemini 2.0 Flash (Fast Model - Sub-Second)</option>
+                  <option value="gemma-4-26b-a4b-it">Gemma 4 26B A4B (gemma-4-26b-a4b-it)</option>
+                  <option value="gemma-4-31b-it">Gemma 4 31B (gemma-4-31b-it)</option>
+                </select>
+              </div>
+
+              <div class="button-row">
+                <button type="button" class="btn btn-secondary" id="btn-test-connection">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  Test Connection
+                </button>
+                <button type="button" class="btn btn-primary" id="btn-save-config">
+                  Save Credentials
+                </button>
+              </div>
+            </form>
+
+            <div class="test-result-box hidden" id="connection-test-result">
+              <div class="test-result-header" id="test-result-title">Test Result</div>
+              <div class="test-result-body" id="test-result-body"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. SOFTWARE INTEGRATION TAB -->
+        <section id="tab-integration" class="tab-pane">
+          <div class="card glass-card max-width-card">
+            <div class="card-header">
+              <h2 class="card-title">Connect Gemma 4 to Existing Software</h2>
+              <span class="badge" id="integration-active-badge">Status: Disabled</span>
+            </div>
+            <p class="card-desc">
+              When software integration is enabled, all built-in application AI tools (Code Assistant, Document Summarizer, Data Converter) route their requests through the central <code>AI.generate</code> router to Gemma 4.
+            </p>
+
+            <!-- ROUTING PREVIEW CARD -->
+            <div class="routing-preview-card">
+              <h3>Software AI Routing Preview</h3>
+              <p class="preview-desc">Visual mapping of active application utilities to the Gemma 4 Provider engine:</p>
+
+              <div class="flow-diagram">
+                <div class="flow-node">Existing Software Utilities</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-node highlight">Central AI Router</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-node provider-node" id="preview-target-node">Gemma 4 Provider</div>
+              </div>
+
+              <div class="utility-preview-grid">
+                <div class="utility-preview-item">
+                  <div class="ut-name">AI Code Assistant</div>
+                  <div class="ut-route">Routes to ➔ <span class="ut-target">Gemma 4 (gemma-4-26b-a4b-it)</span></div>
+                </div>
+                <div class="utility-preview-item">
+                  <div class="ut-name">Document Summarizer</div>
+                  <div class="ut-route">Routes to ➔ <span class="ut-target">Gemma 4 (gemma-4-26b-a4b-it)</span></div>
+                </div>
+                <div class="utility-preview-item">
+                  <div class="ut-name">Data Converter & Translator</div>
+                  <div class="ut-route">Routes to ➔ <span class="ut-target">Gemma 4 (gemma-4-26b-a4b-it)</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="integration-toggle-box">
+              <div class="toggle-info">
+                <h3>Software Integration Status</h3>
+                <p id="integration-toggle-subtext">Currently Disabled. Existing features will not call Gemma 4 until enabled.</p>
+              </div>
+              <button class="btn btn-primary" id="btn-toggle-software-integration">
+                Enable Gemma for Software
+              </button>
+            </div>
+
+            <div class="form-group" style="margin-top: 24px;">
+              <label for="integration-priority-select">Provider Priority / Role</label>
+              <select id="integration-priority-select" class="form-select">
+                <option value="1">Primary Provider (Priority 1)</option>
+                <option value="2">Secondary Provider (Priority 2)</option>
+                <option value="3">Fallback Provider (Priority 3)</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. LOGS & REQUEST HISTORY TAB -->
+        <section id="tab-logs" class="tab-pane">
+          <div class="card glass-card">
+            <div class="card-header">
+              <h2 class="card-title">Real-Time Execution Logs</h2>
+              <button class="btn btn-secondary btn-sm" id="btn-refresh-logs">Refresh Logs</button>
+            </div>
+
+            <div class="stats-bar" id="logs-stats-bar">
+              <div class="stat-box">
+                <span class="stat-num" id="stat-total-req">0</span>
+                <span class="stat-lbl">Total Requests</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-num text-success" id="stat-success-rate">100%</span>
+                <span class="stat-lbl">Success Rate</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-num" id="stat-avg-latency">0ms</span>
+                <span class="stat-lbl">Avg Latency</span>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>Provider</th>
+                    <th>Model</th>
+                    <th>Status</th>
+                    <th>Latency</th>
+                    <th>Tokens (In/Out)</th>
+                    <th>Prompt Preview</th>
+                  </tr>
+                </thead>
+                <tbody id="logs-tbody">
+                  <tr>
+                    <td colspan="7" class="text-center">No execution logs recorded yet.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. BUILT-IN APPLICATION AI TOOLS TAB -->
+        <section id="tab-software-tools" class="tab-pane">
+          <div class="grid-2col">
+            <!-- Tool 1: AI Code Assistant -->
+            <div class="card glass-card">
+              <div class="card-header">
+                <h2 class="card-title">AI Code Assistant</h2>
+                <span class="badge badge-accent">Software Feature</span>
+              </div>
+              <p class="card-desc">Refactor code, optimize functions, or debug errors using the application's central AI provider layer.</p>
+
+              <div class="form-group">
+                <label for="tool-code-input">Code Snippet</label>
+                <textarea id="tool-code-input" class="form-textarea code-font" rows="5" placeholder="// Write or paste function here...&#10;function calculateSum(arr) {&#10;  var total = 0;&#10;  for(var i=0; i<arr.length; i++) { total += arr[i]; }&#10;  return total;&#10;}"></textarea>
+              </div>
+
+              <button class="btn btn-primary" id="btn-run-code-tool">Refactor & Optimize Code</button>
+
+              <div class="tool-output-box hidden" id="tool-code-output">
+                <div class="output-label">Execution Result (via Central Router):</div>
+                <pre class="code-output" id="tool-code-text"></pre>
+              </div>
+            </div>
+
+            <!-- Tool 2: Document Summarizer -->
+            <div class="card glass-card">
+              <div class="card-header">
+                <h2 class="card-title">Smart Document Summarizer</h2>
+                <span class="badge badge-accent">Software Feature</span>
+              </div>
+              <p class="card-desc">Extract key insights, action items, and executive summaries from long form documents.</p>
+
+              <div class="form-group">
+                <label for="tool-doc-input">Document Text</label>
+                <textarea id="tool-doc-input" class="form-textarea" rows="5" placeholder="Paste report, article, or specification text here..."></textarea>
+              </div>
+
+              <button class="btn btn-primary" id="btn-run-doc-tool">Summarize Document</button>
+
+              <div class="tool-output-box hidden" id="tool-doc-output">
+                <div class="output-label">Summary Output:</div>
+                <div class="doc-output" id="tool-doc-text"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

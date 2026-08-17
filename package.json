@@ -1,0 +1,19 @@
+{
+  "name": "gemma-4-ai-integration-hub",
+  "version": "1.0.0",
+  "description": "Gemma 4 AI Integration Hub & Central AI Provider Router",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "gemma4",
+    "ai",
+    "llm",
+    "provider",
+    "router"
+  ],
+  "author": "Antigravity AI",
+  "license": "MIT"
+}
