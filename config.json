@@ -1,0 +1,71 @@
+{
+  "providers": {
+    "gemma": {
+      "enabled": true,
+      "softwareEnabled": true,
+      "apiKey": "",
+      "baseUrl": "https://generativelanguage.googleapis.com/v1beta/models",
+      "model": "gemini-3.5-flash",
+      "priority": 2,
+      "lastStatus": "Error",
+      "lastChecked": "2026-08-18T15:29:47.706Z",
+      "lastLatencyMs": 105,
+      "availableModels": [
+        {
+          "id": "gemma-4-26b-a4b-it",
+          "name": "Gemma 4 26B A4B",
+          "capabilities": [
+            "Text",
+            "Reasoning",
+            "Coding",
+            "Multimodal",
+            "Function Calling"
+          ],
+          "contextWindow": "128k",
+          "recommended": true
+        },
+        {
+          "id": "gemma-4-31b-it",
+          "name": "Gemma 4 31B",
+          "capabilities": [
+            "Text",
+            "Reasoning",
+            "Coding"
+          ],
+          "contextWindow": "128k",
+          "recommended": false
+        }
+      ]
+    },
+    "gemini": {
+      "enabled": true,
+      "softwareEnabled": true,
+      "apiKey": "",
+      "baseUrl": "https://generativelanguage.googleapis.com/v1beta/models",
+      "model": "gemini-3.5-flash",
+      "priority": 1,
+      "lastStatus": "Error",
+      "lastChecked": "2026-08-18T15:15:00.000Z",
+      "lastLatencyMs": 325,
+      "availableModels": [
+        {
+          "id": "gemini-3.5-flash",
+          "name": "Gemini 3.6 Flash (Fast Model)",
+          "capabilities": [
+            "Text",
+            "Reasoning",
+            "Coding",
+            "Low Latency"
+          ],
+          "contextWindow": "1M",
+          "recommended": true
+        }
+      ]
+    }
+  },
+  "router": {
+    "fallbackEnabled": true,
+    "maxRetries": 2,
+    "timeoutMs": 30000
+  }
+}

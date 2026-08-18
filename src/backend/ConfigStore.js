@@ -72,10 +72,13 @@ class ConfigStore {
         if (saved.providers) {
           for (const key of Object.keys(saved.providers)) {
             if (this.config.providers[key]) {
+              const currentApiKey = this.config.providers[key].apiKey;
+              const diskApiKey = saved.providers[key].apiKey;
               this.config.providers[key] = {
                 ...this.config.providers[key],
                 ...saved.providers[key],
-                // Preserve internal model lists if needed
+                // Preserve active in-memory key if disk key is empty
+                apiKey: (currentApiKey && currentApiKey.trim().length > 0) ? currentApiKey : (diskApiKey || ''),
                 availableModels: this.config.providers[key].availableModels
               };
             }
@@ -92,7 +95,14 @@ class ConfigStore {
 
   saveToDisk() {
     try {
-      fs.writeFileSync(this.configFilePath, JSON.stringify(this.config, null, 2), 'utf8');
+      // Create a clean copy stripped of raw API keys to prevent writing secrets to disk
+      const sanitizedConfig = JSON.parse(JSON.stringify(this.config));
+      if (sanitizedConfig.providers) {
+        for (const pName of Object.keys(sanitizedConfig.providers)) {
+          sanitizedConfig.providers[pName].apiKey = '';
+        }
+      }
+      fs.writeFileSync(this.configFilePath, JSON.stringify(sanitizedConfig, null, 2), 'utf8');
     } catch (err) {
       console.error('[ConfigStore] Failed to save config to disk:', err.message);
     }
