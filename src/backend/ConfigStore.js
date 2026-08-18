@@ -99,13 +99,23 @@ class ConfigStore {
   }
 
   getEffectiveApiKey(providerName) {
-    const envVarName = providerName.toUpperCase() + '_API_KEY';
-    const envKey = process.env[envVarName];
-    if (envKey && envKey.trim().length > 0) {
-      return envKey.trim();
-    }
     const p = this.config.providers[providerName];
-    return p ? (p.apiKey || '').trim() : '';
+    const uiKey = (p && p.apiKey) ? p.apiKey.trim() : '';
+    
+    // Priority 1: Explicit securely stored/configured key from Connection UI
+    if (uiKey.length > 0) {
+      return uiKey;
+    }
+    
+    // Priority 2: System Environment Variable fallback (GEMMA_API_KEY / GEMINI_API_KEY)
+    const envVarName = providerName.toUpperCase() + '_API_KEY';
+    const envKey = process.env[envVarName] ? process.env[envVarName].trim() : '';
+    if (envKey.length > 0) {
+      return envKey;
+    }
+
+    // Priority 3: Not Configured
+    return '';
   }
 
   getProviderConfig(providerName) {

@@ -3,7 +3,7 @@
     "gemma": {
       "enabled": true,
       "softwareEnabled": true,
-      "apiKey": "AQ.Ab8RN6KhrX8oBoapoAQvFrycQcNmdEqWoUkDNHzFIJAt0t0CEA",
+      "apiKey": "TEST_UI_KEY_SIMULATION",
       "baseUrl": "https://generativelanguage.googleapis.com/v1beta/models",
       "model": "gemma-4-26b-a4b-it",
       "priority": 2,

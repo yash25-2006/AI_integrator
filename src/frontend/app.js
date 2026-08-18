@@ -204,14 +204,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (overviewModelSelect) overviewModelSelect.value = model;
 
     // 3. Connection Tab
-    if (connBaseUrl && gemma.baseUrl) connBaseUrl.value = gemma.baseUrl;
-    if (connDefaultModel) connDefaultModel.value = model;
-    if (connApiKey) {
-      if (isConfigured && state.keyIsMasked) {
+    const isEditingApiKey = (document.activeElement === connApiKey) || !state.keyIsMasked;
+    const isEditingBaseUrl = (document.activeElement === connBaseUrl);
+    
+    if (connBaseUrl && gemma.baseUrl && !isEditingBaseUrl) {
+      connBaseUrl.value = gemma.baseUrl;
+    }
+    if (connDefaultModel && model && document.activeElement !== connDefaultModel) {
+      connDefaultModel.value = model;
+    }
+    if (connApiKey && !isEditingApiKey) {
+      if (isConfigured) {
         connApiKey.value = '••••••••••••••••';
         connApiKey.type = 'password';
-        if (connKeyStatusText) connKeyStatusText.textContent = 'Status: Configured (Key encrypted server-side).';
-      } else if (!isConfigured) {
+        if (connKeyStatusText) connKeyStatusText.textContent = 'Status: Configured (Key stored server-side).';
+      } else {
         connApiKey.value = '';
         if (connKeyStatusText) connKeyStatusText.textContent = 'Status: Not Configured.';
       }
