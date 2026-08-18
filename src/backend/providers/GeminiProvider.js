@@ -81,7 +81,7 @@ class GeminiProvider extends AIProvider {
       throw new AIError('Missing API key for Gemini Flash provider.', 'CONFIG_ERROR', 401, 'gemini');
     }
 
-    const model = conf.model || 'gemini-3.6-flash';
+    const model = conf.model || 'gemini-3.5-flash';
     const baseUrl = conf.baseUrl || 'https://generativelanguage.googleapis.com/v1beta/models';
 
     configStore.updateProvider('gemini', { lastStatus: 'Testing' });
@@ -154,7 +154,7 @@ class GeminiProvider extends AIProvider {
       throw new AIError('API key is not configured for Gemini Flash provider.', 'CONFIG_ERROR', 401, 'gemini');
     }
 
-    const selectedModel = model || conf.model || 'gemini-3.6-flash';
+    const selectedModel = model || conf.model || 'gemini-3.5-flash';
     const baseUrl = conf.baseUrl || 'https://generativelanguage.googleapis.com/v1beta/models';
 
     const systemText = (systemPrompt && systemPrompt.trim()) ? systemPrompt.trim() : GEMINI_DEFAULT_SYSTEM_INSTRUCTION;
@@ -238,7 +238,7 @@ class GeminiProvider extends AIProvider {
       throw new AIError('API key is not configured for Gemini Flash provider.', 'CONFIG_ERROR', 401, 'gemini');
     }
 
-    const selectedModel = model || conf.model || 'gemini-3.6-flash';
+    const selectedModel = model || conf.model || 'gemini-3.5-flash';
     const baseUrl = conf.baseUrl || 'https://generativelanguage.googleapis.com/v1beta/models';
 
     const contents = (messages || []).map(m => ({

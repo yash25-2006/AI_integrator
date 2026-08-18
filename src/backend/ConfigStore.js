@@ -38,14 +38,14 @@ class ConfigStore {
           softwareEnabled: true,
           apiKey: process.env.GEMINI_API_KEY || '',
           baseUrl: 'https://generativelanguage.googleapis.com/v1beta/models',
-          model: process.env.GEMINI_MODEL || 'gemini-3.6-flash',
+          model: process.env.GEMINI_MODEL || 'gemini-3.5-flash',
           priority: 1,
           lastStatus: 'Not Configured',
           lastChecked: null,
           lastLatencyMs: null,
           availableModels: [
             {
-              id: 'gemini-3.6-flash',
+              id: 'gemini-3.5-flash',
               name: 'Gemini 3.6 Flash (Fast Model)',
               capabilities: ['Text', 'Reasoning', 'Coding', 'Low Latency'],
               contextWindow: '1M',
