@@ -98,8 +98,23 @@ class ConfigStore {
     }
   }
 
+  getEffectiveApiKey(providerName) {
+    const envVarName = providerName.toUpperCase() + '_API_KEY';
+    const envKey = process.env[envVarName];
+    if (envKey && envKey.trim().length > 0) {
+      return envKey.trim();
+    }
+    const p = this.config.providers[providerName];
+    return p ? (p.apiKey || '').trim() : '';
+  }
+
   getProviderConfig(providerName) {
-    return this.config.providers[providerName] || null;
+    const p = this.config.providers[providerName];
+    if (!p) return null;
+    return {
+      ...p,
+      apiKey: this.getEffectiveApiKey(providerName)
+    };
   }
 
   setApiKey(providerName, apiKey) {
@@ -118,7 +133,6 @@ class ConfigStore {
 
   updateProvider(providerName, updates) {
     if (this.config.providers[providerName]) {
-      // Don't allow raw key exposure via general updates unless specified
       const p = this.config.providers[providerName];
       if (updates.model) p.model = updates.model;
       if (updates.baseUrl) p.baseUrl = updates.baseUrl;
@@ -134,18 +148,21 @@ class ConfigStore {
   }
 
   /**
-   * Safe summary of provider configuration for frontend consumption.
+   * Safe summary of provider configuration for frontend & diagnostics.
    * ABSOLUTELY NO RAW API KEYS OR PARTIAL KEY SUFFIXES ARE RETURNED!
    */
   getSanitizedSummary() {
     const summary = {};
     for (const [name, p] of Object.entries(this.config.providers)) {
-      const hasKey = Boolean(p.apiKey && p.apiKey.trim().length > 0);
+      const effectiveKey = this.getEffectiveApiKey(name);
+      const hasKey = Boolean(effectiveKey && effectiveKey.length > 0);
       summary[name] = {
         name,
         enabled: p.enabled,
         softwareEnabled: p.softwareEnabled,
         isConfigured: hasKey,
+        apiKeyConfigured: hasKey,
+        apiKeyLength: effectiveKey.length,
         keyMask: hasKey ? '••••••••••••••••' : '',
         baseUrl: p.baseUrl,
         model: p.model,
@@ -158,7 +175,8 @@ class ConfigStore {
     }
     return {
       providers: summary,
-      router: this.config.router
+      router: this.config.router,
+      environment: process.env.RAILWAY_ENVIRONMENT || process.env.NODE_ENV || 'production'
     };
   }
 }

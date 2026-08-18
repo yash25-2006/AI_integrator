@@ -7,9 +7,9 @@
       "baseUrl": "https://generativelanguage.googleapis.com/v1beta/models",
       "model": "gemma-4-26b-a4b-it",
       "priority": 2,
-      "lastStatus": "Healthy",
-      "lastChecked": "2026-08-17T17:29:29.274Z",
-      "lastLatencyMs": 1713,
+      "lastStatus": "Error",
+      "lastChecked": "2026-08-18T14:29:27.209Z",
+      "lastLatencyMs": 116,
       "availableModels": [
         {
           "id": "gemma-4-26b-a4b-it",

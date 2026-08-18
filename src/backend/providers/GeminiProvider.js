@@ -88,11 +88,14 @@ class GeminiProvider extends AIProvider {
 
     const startTime = Date.now();
     try {
-      const url = `${baseUrl.replace(/\/$/, '')}/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const url = `${baseUrl.replace(/\/$/, '')}/${model}:generateContent`;
       
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey
+        },
         body: JSON.stringify({
           contents: [{ role: 'user', parts: [{ text: 'Ping' }] }],
           generationConfig: { maxOutputTokens: 10 }
@@ -169,11 +172,14 @@ class GeminiProvider extends AIProvider {
 
     const startTime = Date.now();
     try {
-      const url = `${baseUrl.replace(/\/$/, '')}/${selectedModel}:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const url = `${baseUrl.replace(/\/$/, '')}/${selectedModel}:generateContent`;
 
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey
+        },
         body: JSON.stringify(payload)
       });
 
@@ -232,7 +238,7 @@ class GeminiProvider extends AIProvider {
       throw new AIError('API key is not configured for Gemini Flash provider.', 'CONFIG_ERROR', 401, 'gemini');
     }
 
-    const selectedModel = model || conf.model || 'gemini-2.0-flash';
+    const selectedModel = model || conf.model || 'gemini-3.6-flash';
     const baseUrl = conf.baseUrl || 'https://generativelanguage.googleapis.com/v1beta/models';
 
     const contents = (messages || []).map(m => ({
@@ -249,11 +255,14 @@ class GeminiProvider extends AIProvider {
 
     const startTime = Date.now();
     try {
-      const url = `${baseUrl.replace(/\/$/, '')}/${selectedModel}:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const url = `${baseUrl.replace(/\/$/, '')}/${selectedModel}:generateContent`;
 
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey
+        },
         body: JSON.stringify(payload)
       });
 

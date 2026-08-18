@@ -90,13 +90,24 @@ class GemmaProvider extends AIProvider {
 
     configStore.updateProvider('gemma', { lastStatus: 'Testing' });
 
+    console.log('[GemmaProvider Diagnostic]', {
+      host: 'generativelanguage.googleapis.com',
+      model,
+      apiKeyConfigured: Boolean(apiKey && apiKey.trim().length > 0),
+      apiKeyLength: apiKey ? apiKey.trim().length : 0,
+      environment: process.env.RAILWAY_ENVIRONMENT || process.env.NODE_ENV || 'production'
+    });
+
     const startTime = Date.now();
     try {
-      const url = `${baseUrl.replace(/\/$/, '')}/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const url = `${baseUrl.replace(/\/$/, '')}/${model}:generateContent`;
       
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey
+        },
         body: JSON.stringify({
           contents: [{ role: 'user', parts: [{ text: 'Hello Gemma, confirm connection.' }] }],
           generationConfig: { maxOutputTokens: 10 }
@@ -196,11 +207,14 @@ class GemmaProvider extends AIProvider {
 
     const startTime = Date.now();
     try {
-      const url = `${baseUrl.replace(/\/$/, '')}/${selectedModel}:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const url = `${baseUrl.replace(/\/$/, '')}/${selectedModel}:generateContent`;
 
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey
+        },
         body: JSON.stringify(payload)
       });
 
@@ -289,11 +303,14 @@ class GemmaProvider extends AIProvider {
 
     const startTime = Date.now();
     try {
-      const url = `${baseUrl.replace(/\/$/, '')}/${selectedModel}:generateContent?key=${encodeURIComponent(apiKey)}`;
+      const url = `${baseUrl.replace(/\/$/, '')}/${selectedModel}:generateContent`;
 
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-goog-api-key': apiKey
+        },
         body: JSON.stringify(payload)
       });
 
