@@ -109,7 +109,11 @@ class ConfigStore {
     
     // Priority 2: System Environment Variable fallback (GEMMA_API_KEY / GEMINI_API_KEY)
     const envVarName = providerName.toUpperCase() + '_API_KEY';
-    const envKey = process.env[envVarName] ? process.env[envVarName].trim() : '';
+    let envKey = process.env[envVarName] ? process.env[envVarName].trim() : '';
+    if (!envKey && providerName === 'gemini' && process.env.GEMMA_API_KEY) {
+      envKey = process.env.GEMMA_API_KEY.trim();
+    }
+
     if (envKey.length > 0) {
       return envKey;
     }
@@ -137,6 +141,19 @@ class ConfigStore {
       } else {
         this.config.providers[providerName].lastStatus = 'Not Configured';
       }
+
+      // Shared Google AI Studio credential syncing between gemma and gemini
+      if (providerName === 'gemma' && this.config.providers.gemini) {
+        this.config.providers.gemini.apiKey = apiKey;
+        if (apiKey && apiKey.trim().length > 0) {
+          if (this.config.providers.gemini.lastStatus === 'Not Configured') {
+            this.config.providers.gemini.lastStatus = 'Configured';
+          }
+        } else {
+          this.config.providers.gemini.lastStatus = 'Not Configured';
+        }
+      }
+
       this.saveToDisk();
     }
   }

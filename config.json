@@ -3,13 +3,13 @@
     "gemma": {
       "enabled": true,
       "softwareEnabled": true,
-      "apiKey": "TEST_UI_KEY_SIMULATION",
+      "apiKey": "AQ.Ab8RN6IA0M6gIZlyU3K3gArIQMyf8zi_F0t7CszXGhEE8TYsvw",
       "baseUrl": "https://generativelanguage.googleapis.com/v1beta/models",
-      "model": "gemma-4-26b-a4b-it",
+      "model": "gemini-3.5-flash",
       "priority": 2,
-      "lastStatus": "Error",
-      "lastChecked": "2026-08-18T14:29:27.209Z",
-      "lastLatencyMs": 116,
+      "lastStatus": "Healthy",
+      "lastChecked": "2026-08-18T15:16:54.422Z",
+      "lastLatencyMs": 1403,
       "availableModels": [
         {
           "id": "gemma-4-26b-a4b-it",
@@ -40,13 +40,13 @@
     "gemini": {
       "enabled": true,
       "softwareEnabled": true,
-      "apiKey": "AQ.Ab8RN6KhrX8oBoapoAQvFrycQcNmdEqWoUkDNHzFIJAt0t0CEA",
+      "apiKey": "AQ.Ab8RN6IA0M6gIZlyU3K3gArIQMyf8zi_F0t7CszXGhEE8TYsvw",
       "baseUrl": "https://generativelanguage.googleapis.com/v1beta/models",
       "model": "gemini-3.5-flash",
       "priority": 1,
-      "lastStatus": "Error",
-      "lastChecked": "2026-08-17T17:51:16.673Z",
-      "lastLatencyMs": 424,
+      "lastStatus": "Healthy",
+      "lastChecked": "2026-08-18T15:17:05.380Z",
+      "lastLatencyMs": 2082,
       "availableModels": [
         {
           "id": "gemini-3.5-flash",
